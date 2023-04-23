@@ -1,0 +1,30 @@
+﻿@page "/"
+@inject ApplicationDbContext Banco
+
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+
+<RadzenStack Orientation="Orientation.Vertical" Gap="4px">
+    <RadzenTextBox @bind-Value="@Draco.nome" Placeholder="Nome" />@Draco.nome;
+    <RadzenTextBox @bind-Value="@Draco.corAura" Placeholder="Cor" />@Draco.corAura;
+    <RadzenTextBox @bind-Value="@Draco.estado" Placeholder="Estado" />@Draco.estado;
+    <RadzenButton Click="@Adiciona" Text="Clique" ButtonStyle="ButtonStyle.Dark" />
+</RadzenStack>
+
+@code
+{      
+    Dragao Draco = new();
+
+    private void Adiciona()
+    {
+        Draco.Id = 0;
+        Banco.Dragoes.Add(Draco);
+        Banco.SaveChanges();
+    }
+
+}
